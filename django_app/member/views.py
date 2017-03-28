@@ -1,7 +1,8 @@
 from pprint import pprint
 
 import requests
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect
 
 from config import settings
 
@@ -13,6 +14,11 @@ def login_fbv(request):
         'facebook_app_id': facebook_app_id,
     }
     return render(request, 'member/login.html', context)
+
+
+def logout_fbv(request):
+    logout(request)
+    return redirect('index')
 
 
 def login_facebook(request):
@@ -43,7 +49,7 @@ def login_facebook(request):
         USER_ACCESS_TOKEN = dict_access_token['access_token']
         print('ACCESS_TOKEN : %s' % USER_ACCESS_TOKEN)
 
-        #유저 액세스 토큰과 앱 액세스 토큰을 사용해서 토큰 검증을 거친다
+        # 유저 액세스 토큰과 앱 액세스 토큰을 사용해서 토큰 검증을 거친다
         url_debug_token = 'https://graph.facebook.com/debug_token'
         params = {
             'input_token': USER_ACCESS_TOKEN,
@@ -54,3 +60,8 @@ def login_facebook(request):
         pprint(dict_debug_token)
         USER_ID = dict_debug_token['data']['user_id']
         print('USER_ID : %s' % USER_ID)
+
+        # 페이스북 유저ID만으로 인증
+        user = authenticate(facebook_id=USER_ID)
+        login(request, user)
+        return redirect('index')
