@@ -49,12 +49,16 @@ else:
 config_common = json.loads(open(CONFIG_FILE_COMMON).read())
 config = json.loads(open(CONFIG_FILE).read())
 
-# common과 현재 사용설정 (local또는 deploy)를 합쳐줌
+# Integrate common and current directory (local or deploy)
 for key, key_dict in config_common.items():
     if not config.get(key):
         config[key] = {}
     for inner_key, inner_key_dict in key_dict.items():
         config[key][inner_key] = inner_key_dict
+
+# Client key directory
+CLIENT_FILE = os.path.join(CONF_DIR, 'clients.json')
+clients = json.loads(open(CLIENT_FILE).read())
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
