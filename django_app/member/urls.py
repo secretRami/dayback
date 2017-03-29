@@ -10,8 +10,8 @@ router.register(r'user', views.UserViewSet)
 router.register(r'group', views.GroupViewSet)
 
 urlpatterns = [
-    url(r'^member/', include(router.urls)),
+    url('', include(router.urls)),
     # URL for authentication
     # 인증처리를 위한 URL
-    url(r'^member/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

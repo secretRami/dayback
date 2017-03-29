@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^auth/', include('rest_framework_social_oauth2.urls')),
     # Access to OAuth Toolkit
     url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
-    url(r'^', include('member.urls')),
+    url(r'^member/', include('member.urls')),
 ]
 
 urlpatterns += static(
