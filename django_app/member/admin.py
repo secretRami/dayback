@@ -7,6 +7,7 @@ Referred to Django Documentation v1.10
 https://docs.djangoproject.com/en/1.10/topics/auth/customizing/
 """
 from django import forms
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 from .models import MyUser
@@ -66,3 +67,34 @@ class UserChangeForm(forms.ModelForm):
         이용자의 입력과 관계없이 비밀번호 초기값을 불러온다.
         """
         return self.initial['password']
+
+
+class UserAdmin(BaseUserAdmin):
+    """
+    Form to add and update user instances.
+    이용자 인스턴스의 추가, 수정을 위한 폼.
+    """
+    form = UserChangeForm
+    add_form = UserCreationForm
+
+    # Override default UserAdmin (as BaseUserAdmin) with fields in MyUser model.
+    # 기본 UserAdmin(BaseUserAdmin으로 개명)을 MyUser 모델의 필드로 덮어쓴다.
+    list_display = ('email', 'nickname', 'is_admin')
+    list_filter = ('is_admin',)
+    fieldsets = (
+        (None, {'fields': ('email', 'password')}),
+        ('Personal info', {'fields': ('nickname',)}),
+        ('Permissions', {'fields': ('is_admin',)}),
+    )
+
+    # Override get_fieldsets when creating user.
+    # 이용자 생성시 get_fieldsets를 덮어쓴다.
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('email', 'nickname', 'password1', 'password2')
+        }),
+    )
+    search_fields = ('email',)
+    ordering = ('email',)
+    filter_horizontal = ()
