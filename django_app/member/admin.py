@@ -7,6 +7,7 @@ Referred to Django Documentation v1.10
 https://docs.djangoproject.com/en/1.10/topics/auth/customizing/
 """
 from django import forms
+from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 from .models import MyUser
 
@@ -44,3 +45,24 @@ class UserCreationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class UserChangeForm(forms.ModelForm):
+    """
+    Modelform for updating user.
+    Display password hashed.
+    이용자 업데이트를 위한 모델폼.
+    비밀번호는 해쉬화해서 보여준다.
+    """
+    password = ReadOnlyPasswordHashField()
+
+    class Meta:
+        model = MyUser
+        fields = ('email', 'password', 'nickname', 'is_active', 'is_admin')
+
+    def clean_password(self):
+        """
+        Return initial value regardless of user input.
+        이용자의 입력과 관계없이 비밀번호 초기값을 불러온다.
+        """
+        return self.initial['password']
