@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 MOOD_CHOICE = (
     ('Bad', '1'),
     ('SoSo', '2'),

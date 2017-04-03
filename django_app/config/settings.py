@@ -49,7 +49,7 @@ else:
 config_common = json.loads(open(CONFIG_FILE_COMMON).read())
 config = json.loads(open(CONFIG_FILE).read())
 
-# common과 현재 사용설정 (local또는 deploy)를 합쳐줌
+# Integrate common and current directory (local or deploy)
 for key, key_dict in config_common.items():
     if not config.get(key):
         config[key] = {}
@@ -77,8 +77,16 @@ INSTALLED_APPS = [
 
     'rest_framework',
 
-    'post',
+    'member.apps.MemberConfig',
+    'post.apps.PostConfig',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser',
+    ],
+    'PAGE_SIZE': 10
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -101,6 +109,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.media',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -115,16 +124,20 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': config['db']['engine'],
+        'NAME': config['db']['name'],
+        'USER': config['db']['user'],
+        'PASSWORD': config['db']['password'],
+        'HOST': config['db']['host'],
+        'PORT': config['db']['port'],
     }
 }
+
+AUTH_USER_MODEL = 'member.MyUser'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
-##만수군 유저에 붙일 것
-# AUTH_USER_MODEL = 'MyUser'
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',

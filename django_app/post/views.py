@@ -1,9 +1,7 @@
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import generics
 from rest_framework.parsers import JSONParser
 from rest_framework.renderers import JSONRenderer
-from rest_framework.generics import ListAPIView
 
 from post.models import Mood
 from post.serializers import MoodSerializer
@@ -40,6 +38,7 @@ def mood_list(request):
             return JSONResponse(serializer.data, status=201)
         return JSONResponse(serializer.errors, status=400)
 
+
 @csrf_exempt
 def mood_detail(request, pk):
     try:
@@ -62,5 +61,3 @@ def mood_detail(request, pk):
     elif request.method == 'DELETE':
         mood.delete()
         return HttpResponse(status=204)
-
-
