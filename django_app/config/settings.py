@@ -77,7 +77,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
 
-    'member',
+    'post',
 ]
 
 MIDDLEWARE = [
@@ -122,10 +122,9 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
-AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend',
-                           'member.backends.FacebookBackend',
-]
-AUTH_USER_MODEL = 'member.MyUser'
+
+##만수군 유저에 붙일 것
+# AUTH_USER_MODEL = 'MyUser'
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
