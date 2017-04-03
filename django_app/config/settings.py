@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'member.apps.MemberConfig',
+    'post.apps.PostConfig',
 ]
 
 REST_FRAMEWORK = {
