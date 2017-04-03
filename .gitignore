@@ -1,6 +1,6 @@
 # Created by https://www.gitignore.io/api/macos,git,python,pycharm,django,bower,virtualenv,sass,elasticbeanstalk,node
 
-### Project Packages ###
+### Project Custom ###
 .conf-secret/
 __dev*/
 *.~
@@ -24,6 +24,7 @@ bower_components
 ### Django ###
 *.log
 *.pot
+*.py[co]
 *.pyc
 __pycache__/
 local_settings.py
