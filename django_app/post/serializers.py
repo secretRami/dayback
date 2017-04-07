@@ -6,4 +6,4 @@ from post.models import Mood
 class MoodSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mood
-        fields = ('id', 'mood_chk', 'mood_comment')
+        fields = ('id', 'created_date', 'mood_chk', 'mood_comment')
