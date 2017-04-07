@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from post.models import Mood, MOOD_CHOICE
+from post.models import Mood
 
 
 class MoodSerializer(serializers.ModelSerializer):
