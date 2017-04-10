@@ -17,11 +17,21 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
+from rest_framework import routers
+
+from member import views as member_view
+from post import views as post_view
+
+router = routers.DefaultRouter()
+router.register(r'member', member_view.UserViewSet)
+router.register(r'post', post_view.PostViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^member/', include('member.urls')),
-    url(r'^post/', include('post.urls')),
+    url(r'', include(router.urls)),
+    # URL for authentication
+    # 인증처리를 위한 URL
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 urlpatterns += static(

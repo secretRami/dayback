@@ -3,7 +3,7 @@ from rest_framework import serializers
 from post.models import Mood
 
 
-class MoodSerializer(serializers.ModelSerializer):
+class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mood
-        fields = ('id', 'created_date', 'mood_chk', 'mood_comment')
+        fields = ('author', 'id', 'created_date', 'mood_chk', 'mood_comment')

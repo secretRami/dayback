@@ -9,13 +9,15 @@ class Mood(models.Model):
     MOOD_VERY_GOOD = 4
 
     MOOD_CHOICE = (
-        (MOOD_VERY_BAD, 'VeryBad'),
-        (MOOD_BAD, 'Bad'),
-        (MOOD_GOOD, 'Good'),
         (MOOD_VERY_GOOD, 'VeryGood'),
+        (MOOD_GOOD, 'Good'),
+        (MOOD_BAD, 'Bad'),
+        (MOOD_VERY_BAD, 'VeryBad'),
     )
 
-    created_date = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey('member.MyUser')
+    created_date = models.DateField(auto_now_add=True)
+    created_date_ = models.DateField
     mood_chk = models.IntegerField(choices=MOOD_CHOICE)
     mood_comment = models.CharField(max_length=400)
 
