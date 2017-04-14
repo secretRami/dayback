@@ -28,13 +28,13 @@ router.register(r'post', post_view.PostViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'', include(router.urls)),
-    # URL for authentication
-    # 인증처리를 위한 URL
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+#     url(r'', include(router.urls)),
+#     # URL for authentication
+#     # 인증처리를 위한 URL
+#     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
-
-urlpatterns += static(
-    settings.MEDIA_URL,
-    document_root=settings.MEDIA_ROOT
-)
+#
+# urlpatterns += static(
+#     settings.MEDIA_URL,
+#     document_root=settings.MEDIA_ROOT
+# )
