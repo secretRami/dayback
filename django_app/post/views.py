@@ -2,7 +2,6 @@ import django_filters
 from django.contrib.auth import get_user_model
 from rest_framework import permissions
 from rest_framework import viewsets
-from rest_framework.generics import GenericAPIView
 
 from .models import Post
 from .serializers import PostSerializer
@@ -19,7 +18,8 @@ class PostFilter(django_filters.rest_framework.FilterSet):
         model = Post
         fields = ('created_date_year', 'created_date_month', 'created_date_day')
 
-class PostViewSet(viewsets.ModelViewSet, GenericAPIView):
+
+class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
     filter_class = PostFilter
     permission_classes = (permissions.IsAuthenticated,)
