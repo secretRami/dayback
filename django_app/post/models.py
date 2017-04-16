@@ -20,5 +20,12 @@ class Post(models.Model):
     mood_chk = models.IntegerField(choices=MOOD_CHOICE)
     mood_comment = models.CharField(max_length=400)
 
+    # 아직 필요한지 아닌지 잘 모르겠음
+    # class Meta:
+    #     ordering = ('created_date',)
+    #
+    # def save(self, *args, **kwargs):
+    #     return super.save(*args, **kwargs)
+
 
 

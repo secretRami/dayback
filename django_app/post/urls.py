@@ -1,8 +1,3 @@
-from post.views import PostViewSet
-from rest_framework import renderers
+from django.conf.urls import url
 
-post = PostViewSet.as_view({
-    'get': 'get_queryset',
-    'put': 'perform_update',
-    'delete': 'perform_destroy'
-})
+from . import views

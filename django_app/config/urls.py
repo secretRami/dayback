@@ -27,11 +27,18 @@ router.register(r'user', member_view.UserViewSet, 'user')
 router.register(r'signup', member_view.SignUpViewSet, 'signup')
 router.register(r'login', member_view.LogInViewSet, 'login')
 router.register(r'logout', member_view.LogOutViewSet, 'logout')
-router.register(r'post', post_view.PostViewSet, base_name='post')
+
+# ViewSet쓰고싶지만 능력이 안됨ㅠㅠㅠㅠㅠ
+router.register(r'post', post_view.ListViewSet, 'post')
+# router.register(r'post', post_view.PostViewSet, 'post')
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include(router.urls)),
+
+    # 으으 화가난다!
+    # url(r'^post/', include('post.urls')),
+
     # URL for authentication
     # 인증처리를 위한 URL
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
